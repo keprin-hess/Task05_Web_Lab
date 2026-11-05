@@ -15,20 +15,20 @@ namespace Task05.Controllers
 
         private static List<Book> books = new List<Book>
         {
-            // Har book ka AuthorId kisi valid Author ki Id se match kar raha hai[cite: 73]
+
             new Book { Id = 1, Title = "Harry Potter 1", Price = 25.50m, AuthorId = 1 },
             new Book { Id = 2, Title = "Game of Thrones", Price = 30.00m, AuthorId = 2 },
             new Book { Id = 3, Title = "Harry Potter 2", Price = 28.00m, AuthorId = 1 }
         };
 
-        // Naya Author ID generate karne ka code (last Id + 1)[cite: 73]
+
         private int GetNextAuthorId()
         {
             if (authors.Count == 0) return 1;
             return authors.Max(a => a.Id) + 1;
         }
 
-        // Naya Book ID generate karne ka code (last Id + 1)[cite: 73]
+
         private int GetNextBookId()
         {
             if (books.Count == 0) return 1;
@@ -36,14 +36,13 @@ namespace Task05.Controllers
         }
         public IActionResult Index()
         {
-            // Task 2: HomeViewModel banana aur DataStore se build karna[cite: 12]
+
             HomeViewModel viewModel = new HomeViewModel();
             viewModel.Authors = authors;
             viewModel.Books = new List<BookCardViewModel>();
 
             foreach (var book in books)
             {
-                // AuthorName ko book ke AuthorId ke zariye find karna[cite: 12]
                 var author = authors.FirstOrDefault(a => a.Id == book.AuthorId);
 
                 viewModel.Books.Add(new BookCardViewModel
@@ -55,7 +54,7 @@ namespace Task05.Controllers
                 });
             }
 
-            // ViewModel ko Index view ko pass karna[cite: 12]
+
             return View(viewModel);
         }
 
@@ -68,6 +67,18 @@ namespace Task05.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        
+        public IActionResult Contact()
+        {
+            return View();
         }
     }
 }

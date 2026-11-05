@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal Price { get; set; }
-        public int AuthorId { get; set; } // Yeh Author ki Id se link hoga
+        public int AuthorId { get; set; } 
     }
 }
