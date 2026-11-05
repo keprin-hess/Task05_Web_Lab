@@ -80,5 +80,43 @@ namespace Task05.Controllers
         {
             return View();
         }
+
+        // 1. Add Book (POST)
+        [HttpPost]
+        public IActionResult AddBook(string Title, decimal Price, int AuthorId)
+        {
+            
+            if (string.IsNullOrWhiteSpace(Title))
+            {
+                return RedirectToAction("Index");
+            }
+
+            int newId = GetNextBookId();
+            books.Add(new Book { Id = newId, Title = Title, Price = Price, AuthorId = AuthorId });
+
+            return RedirectToAction("Index"); 
+        }
+
+        
+        [HttpPost]
+        public IActionResult AddAuthor(string Name, string Country)
+        {
+            int newId = GetNextAuthorId();
+            authors.Add(new Author { Id = newId, Name = Name, Country = Country });
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult RemoveBook(int Id)
+        {
+            var book = books.FirstOrDefault(b => b.Id == Id);
+            if (book != null)
+            {
+                books.Remove(book);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
