@@ -8,3 +8,24 @@
     <h1 class="display-4">Welcome to Book Store</h1>
     <p>Task 2 is successfully connected!</p>
 </div>
+
+@section Styles {
+    <style>
+        .book-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        function confirmRemove() {
+            return confirm("Remove this book?");
+        }
+    </script>
+}
