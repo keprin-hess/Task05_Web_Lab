@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Task05.Models;
+using Task05.ViewModels;
 
 namespace Task05.Controllers
 {
@@ -35,7 +36,27 @@ namespace Task05.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            // Task 2: HomeViewModel banana aur DataStore se build karna[cite: 12]
+            HomeViewModel viewModel = new HomeViewModel();
+            viewModel.Authors = authors;
+            viewModel.Books = new List<BookCardViewModel>();
+
+            foreach (var book in books)
+            {
+                // AuthorName ko book ke AuthorId ke zariye find karna[cite: 12]
+                var author = authors.FirstOrDefault(a => a.Id == book.AuthorId);
+
+                viewModel.Books.Add(new BookCardViewModel
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Price = book.Price,
+                    AuthorName = author != null ? author.Name : "Unknown"
+                });
+            }
+
+            // ViewModel ko Index view ko pass karna[cite: 12]
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
